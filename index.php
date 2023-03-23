@@ -39,7 +39,6 @@ class Cibo extends Prodotti
     }
 }
 $my_meal = new Cibo("Crocchette", 4.99, "cat", "img", "scaffale C-15", 2023.03);
-var_dump($my_meal);
 
 class Giochi extends Prodotti
 {
@@ -60,7 +59,6 @@ class Giochi extends Prodotti
     }
 }
 $my_toy = new Giochi("Osso di gomma", 9.99, "dog", "img", "gommoso", 0);
-var_dump($my_toy);
 
 class Cucce extends Prodotti
 {
@@ -81,8 +79,14 @@ class Cucce extends Prodotti
     }
 }
 $my_cuccia = new Cucce("Cuccia in legno", 59.99, "dog", "img", "Legno", "artDog s.r.l");
-var_dump($my_cuccia);
 
+// ARRAY DEI PRODOTTI:
+$products = [
+    $my_meal,
+    $my_toy,
+    $my_cuccia,
+];
+var_dump($products);
 ?>
 
 <!DOCTYPE html>
@@ -98,16 +102,24 @@ var_dump($my_cuccia);
 
 <body>
     <div class="container">
-        <div class="card" style="width: 18rem;">
-            <img src="$pic" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">$name</h5>
-                <p class="card-text">$price</p>
-                <p class="card-text">$for</p>
-                <p class="card-text">$price</p>
-                <p class="card-text">$materials</p>
-                <p class="card-text">$building</p>
-                <a href="#" class="btn btn-primary">Acquista</a>
+        <div class="row">
+            <?php
+            //foreach ($products as $product) 
+            //{echo $product;}
+            ?>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="$pic" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">$name</h5>
+                        <p class="card-text">$price</p>
+                        <p class="card-text">$for</p>
+                        <p class="card-text">$price</p>
+                        <p class="card-text">$materials</p>
+                        <p class="card-text">$building</p>
+                        <a href="#" class="btn btn-primary">Acquista</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
