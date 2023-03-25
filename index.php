@@ -6,6 +6,7 @@ class Prodotti
     public $price;
     public $for;
     public $pic;
+    protected $codice;
 
     public function __construct(
         string $_name,
@@ -17,6 +18,12 @@ class Prodotti
         $this->price = $_price;
         $this->for = $_for;
         $this->pic = $_pic;
+        $this->codice = 123;
+    }
+
+    public function getCodice()
+    {
+        return $this->codice;
     }
 }
 
@@ -38,7 +45,6 @@ class Cibo extends Prodotti
         $this->expir = $_expir;
     }
 }
-$my_meal = new Cibo("Crocchette", 4.99, "cat", "img", "scaffale C-15", 2023.03);
 
 class Giochi extends Prodotti
 {
@@ -58,7 +64,6 @@ class Giochi extends Prodotti
         $this->age = $_age;
     }
 }
-$my_toy = new Giochi("Osso di gomma", 9.99, "dog", "img", "gommoso", 0);
 
 class Cucce extends Prodotti
 {
@@ -78,7 +83,10 @@ class Cucce extends Prodotti
         $this->builder = $_builder;
     }
 }
-$my_cuccia = new Cucce("Cuccia in legno", 59.99, "dog", "img", "Legno", "artDog s.r.l");
+
+$my_meal = new Cibo("Crocchette Super", 4.99, "gatto", "./food.gatto.webp", "scaffale C-15", 2023.03);
+$my_toy = new Giochi("Osso di gomma", 9.99, "cane", "./bones.jpg", "gommoso", 0);
+$my_cuccia = new Cucce("Cuccia in legno", 59.99, "cane", "./cuccia.webp", "Legno", "artDog s.r.l");
 
 // ARRAY DEI PRODOTTI:
 $products = [
@@ -86,7 +94,8 @@ $products = [
     $my_toy,
     $my_cuccia,
 ];
-var_dump($products);
+//var_dump($products);
+//echo $produc->name;
 ?>
 
 <!DOCTYPE html>
@@ -101,29 +110,41 @@ var_dump($products);
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <?php
-            //foreach ($products as $product) 
-            //{echo $product;}
-            ?>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="$pic" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">$name</h5>
-                        <p class="card-text">$price</p>
-                        <p class="card-text">$for</p>
-                        <p class="card-text">$price</p>
-                        <p class="card-text">$materials</p>
-                        <p class="card-text">$building</p>
-                        <a href="#" class="btn btn-primary">Acquista</a>
+    <div class="container bg-secondary p-5">
+
+        <div class="row ">
+            <h1 class="text-center m-4">PET SHOP</h1>
+            <?php foreach ($products as $product) : ?>
+                <div class="col justify-content-center">
+                    <div class="card" style="width: 18rem;">
+                        <img src="<?php echo $product->pic; ?>" class="card-img-top w-50" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">Nome: <?php echo $product->name; ?></h5>
+                            <p class="card-text">Prezzo: <?php echo $product->price ?> $</p>
+                            <p class="card-text">Per il tuo <?php echo $product->for ?></p>
+
+                            <?php if ($product instanceof Cibo) : ?>
+                                <p class="card-text">Scadenza: <?php echo $product->expir ?></p>
+                                <p class="card-text">Scaffale: <?php echo $product->rack ?></p>
+                            <?php endif; ?>
+
+                            <?php if ($product instanceof Giochi) : ?>
+                                <p class="card-text">Tipo: <?php echo $product->type ?></p>
+                                <p class="card-text">Età: <?php echo $product->age ?></p>
+                            <?php endif; ?>
+
+                            <?php if ($product instanceof Cucce) : ?>
+                                <p class="card-text">Materiale: <?php echo $product->material ?></p>
+                                <p class="card-text">Costruttore: <?php echo $product->builder ?></p>
+                            <?php endif; ?>
+
+                            <a href="#" class="btn btn-primary">Aggiunci al carrello</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
-
 </body>
 
 </html>
